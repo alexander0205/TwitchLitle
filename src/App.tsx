@@ -17,6 +17,8 @@ import '@ionic/react/css/display.css'
 
 /* Theme variables */
 import './theme/variables.css'
+
+
 import Navigation from './navigation/index'
 const Ap: React.FC = () => {
   return <Navigation />

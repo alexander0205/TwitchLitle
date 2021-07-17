@@ -1,4 +1,4 @@
-import { APITwitch,Result } from '../api/api.twitch'
+import { APITwitch,ResultAuth,ResultApi } from '../api/api.twitch'
 import { GlobalConfig } from '../GlobalConfig'
 import { OpenUrlBrowser } from '../helpers/index'
 import { createAuthProvider, } from '../utils/auth.token'
@@ -19,10 +19,15 @@ export const browserAuthentication = (): void => {
   OpenUrlBrowser(urlTwitchAuth)
 }
 
-export const getAccesTokenByAccesCode = async (code: string): Promise<Result> => {
+export const getAccesTokenByAccesCode = async (code: string): Promise<ResultAuth> => {
   const _APITwitch = new APITwitch()
   return _APITwitch.getAccesToken(code, GlobalConfig.redirect.login_redirect)
 }
 
+export const getUserData = async (): Promise<ResultApi> => {
+  const token = await getToken()
+  const _APITwitch = new APITwitch()
+  return _APITwitch.getUserData(token)
+}
 
 
