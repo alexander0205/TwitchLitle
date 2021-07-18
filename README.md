@@ -12,6 +12,9 @@ First, generate the ApiKey, read.
 go to .env  and change the keys
 REACT_APP_TWITCH_API_CLIENT_ID = "Client ID"
 REACT_APP_TWITCH_API_CLIENT_SECRET = "Client Secret"
+**Twitch Redirect URL**
+Requirement on the Twitch App site to register an App you need an OAuth Redirect URL.
+In this case register this URL: https://us-central1-twitchlitle.cloudfunctions.net/twitchlitle_redirect
 
 **Note: URLSCHEME**
 The API of twitch only accept URLs HTTPS in the redirect, in this case, I created a little API with firebase, the application will call Twitch and Twitch will redirect to firebase API and the API will redirect to the app.
