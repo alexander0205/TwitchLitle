@@ -1,5 +1,8 @@
 import React, { FC } from 'react'
-import { IonButton, IonContent, IonText, IonLoading, IonToast } from '@ionic/react'
+import {
+    IonTitle, IonToolbar, IonCardTitle, IonImg, IonCardContent, IonCardHeader, IonCard, IonListHeader, IonIcon, IonLabel, IonItem, IonList, IonButton, IonContent, IonText, IonLoading, IonToast,
+    IonHeader, IonCardSubtitle
+} from '@ionic/react'
 
 interface IndexLogin {
     authentication: any,
@@ -26,24 +29,50 @@ const Index: FC<IndexLogin> = ({ authentication, code, showLoading, setShowLoadi
             message={'Please wait...'}
             duration={5000}
         />
-        <div>
-            {code ? (
-                <h3>
-                    The <code>name</code> in the query string is &quot;{code}
-                    &quot;
-                </h3>
-            ) : (
-                <h3>There is no name in the query string</h3>
-            )}
-        </div>
-        <IonText color="secondary">
-            <h1>H1: The quick brown fox jumps over the lazy dog</h1>
-        </IonText>
-        <IonButton onClick={authentication} expand="full">
-            Login With Twitch
-        </IonButton>
-    </IonContent>
-    )
+        <IonHeader>
+            <IonToolbar>
+                <IonTitle>
+                   Twitch Litle
+                </IonTitle>
+            </IonToolbar>
+        </IonHeader>
+
+        <IonContent>
+            <IonCard class="welcome-card">
+                <IonImg src="/assets/shapes.svg"></IonImg>
+                <IonCardHeader>
+                    <IonCardSubtitle>Gazoom Movile Test</IonCardSubtitle>
+                    <IonCardTitle>Welcome to TwitchLitle</IonCardTitle>
+                </IonCardHeader>
+                <IonCardContent>
+                    <p>
+                    This a test mobile app for Gazoom developed by Alexander Ferreras, the purpose of this app probes my skills in developing applications, in this section "login flow using twitch authentication flow manually." 
+                    </p>
+                    <IonButton onClick={authentication} margin-top >Login</IonButton>
+                </IonCardContent>
+            </IonCard>
+           
+            <IonList lines="none">
+                <IonListHeader>
+                    <IonLabel>Resources</IonLabel>
+                </IonListHeader>
+                <IonItem href="https://www.linkedin.com/in/alexanderferreras/">
+                    <IonIcon slot="start" color="medium" name="book"></IonIcon>
+                    <IonLabel>My linkedin</IonLabel>
+                </IonItem>
+                <IonItem href="https://github.com/alexander0205/TwitchLitle">
+                    <IonIcon slot="start" color="medium" name="build"></IonIcon>
+                    <IonLabel>Github Code</IonLabel>
+                </IonItem>
+                <IonItem href="https://github.com/alexander0205">
+                    <IonIcon slot="start" color="medium" name="grid"></IonIcon>
+                    <IonLabel>My Github</IonLabel>
+                </IonItem>
+             
+            </IonList>
+        </IonContent>
+        </IonContent>
+        )
 }
 
-export default Index
+        export default Index

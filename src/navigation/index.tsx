@@ -9,12 +9,12 @@ import {
   IonTabs,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, home, triangle,person } from 'ionicons/icons';
-import Tab1 from '../pages/tabs/Tab1';
-import Tab2 from '../pages/tabs/Tab2';
-import Tab3 from '../pages/tabs/Tab3';
+import { person } from 'ionicons/icons';
+
 import AppUrlListener from './url.listener';
 import Login from '../pages/auth/login';
+import Profile from '../pages/tabs/profile';
+
 import PrivateRoute from './private.route';
 
 export default function Index() {
@@ -30,12 +30,15 @@ export default function Index() {
           <PrivateRoute>
             <IonTabs>
               <IonRouterOutlet>
+              <Route exact path="/tab1">
+                  <Profile />
+                </Route>
                 <Route exact path="/">
-                  <Redirect to="/tab2" />
+                  <Redirect to="/tab1" />
                 </Route>
               </IonRouterOutlet>
               <IonTabBar slot="bottom">
-                <IonTabButton tab="tab2" href="/tab2">
+                <IonTabButton tab="tab1" href="/tab1s">
                   <IonIcon icon={person} />
                   <IonLabel>Profile</IonLabel>
                 </IonTabButton>
