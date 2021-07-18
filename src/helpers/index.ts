@@ -10,8 +10,9 @@ export const OpenUrlInAppBrowser = (URL: string): void => {
 }
 export const OpenUrlBrowser = (URL: string): void => {
   const openCapacitorSite = async () => {
-    Browser.addListener('browserFinished', () => {})
     await Browser.open({ url: URL, presentationStyle: 'popover' })
   }
   openCapacitorSite()
 }
+
+

@@ -30,26 +30,15 @@ export default function Index() {
           <PrivateRoute>
             <IonTabs>
               <IonRouterOutlet>
-                <Route exact path="/tab1">
-                  <Tab1 />
-                </Route>
-                <Route exact path="/tab2">
-                  <Tab2 />
-                </Route>
                 <Route exact path="/">
-                  <Redirect to="/tab1" />
+                  <Redirect to="/tab2" />
                 </Route>
               </IonRouterOutlet>
               <IonTabBar slot="bottom">
-                <IonTabButton tab="tab1" href="/tab1">
-                  <IonIcon icon={home} />
-                  <IonLabel>Home</IonLabel>
-                </IonTabButton>
                 <IonTabButton tab="tab2" href="/tab2">
                   <IonIcon icon={person} />
                   <IonLabel>Profile</IonLabel>
                 </IonTabButton>
-             
               </IonTabBar>
             </IonTabs>
           </PrivateRoute>

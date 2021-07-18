@@ -1,7 +1,8 @@
-import { APITwitch,ResultAuth,ResultApi } from '../api/api.twitch'
+import { APITwitch} from '../api/api.twitch'
 import { GlobalConfig } from '../GlobalConfig'
 import { OpenUrlBrowser } from '../helpers/index'
 import { createAuthProvider, } from '../utils/auth.token'
+import { ResultApi,ResultAuth } from '../api/api.entities'
 
 export const [useAuth, authFetch, login, logout, getToken] = createAuthProvider<{
   accessToken: string
@@ -16,6 +17,7 @@ export const browserAuthentication = (): void => {
   const urlTwitchAuth = _APITwitch.getURLAuthToken(
     GlobalConfig.redirect.login_redirect,
   )
+
   OpenUrlBrowser(urlTwitchAuth)
 }
 

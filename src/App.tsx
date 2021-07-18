@@ -1,7 +1,6 @@
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css'
-
 /* Basic CSS for apps built with Ionic */
 import '@ionic/react/css/normalize.css'
 import '@ionic/react/css/structure.css'
@@ -20,8 +19,8 @@ import './theme/variables.css'
 
 
 import Navigation from './navigation/index'
-const Ap: React.FC = () => {
+const App: React.FC = () => {
   return <Navigation />
 }
 
-export default Ap
+export default App

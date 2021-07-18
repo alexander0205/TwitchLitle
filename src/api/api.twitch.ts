@@ -1,28 +1,29 @@
 import { Endpoints, Scope } from './api.constants'
 import { GlobalConfig } from '../GlobalConfig'
+import { ResultApi,ResultAuth } from './api.entities'
 
 const CLIENT_ID: string = `${GlobalConfig.twitch.CLIENT_ID}`
 const CLIENT_SECRET: string = `${GlobalConfig.twitch.CLIENT_SECRET}`
 
-export type ResultAuth = {
-  valid: boolean;
-  access_token: string
-  refresh_token: string
-  message: string
-}
-export type ResultApi = {
-  valid: boolean;
-  data: {data:[{email:string,display_name:string,profile_image_url:string}]}
-  message: string
-}
 export class APITwitch {
 
+  /**
+   * 
+   * @param RedirectURL 
+   * @returns 
+   */
   public getURLAuthToken(RedirectURL: string): string {
     const paramas = `?client_id=${CLIENT_ID}&redirect_uri=${RedirectURL}&response_type=code&scope=${Scope.UserRead}`
     const url = `${GlobalConfig.twitch.URL_AUTH}${Endpoints.authorize}${paramas}`
     return url
   }
 
+  /**
+   * 
+   * @param Code 
+   * @param redirect_uri 
+   * @returns 
+   */
   public async getAccesToken(Code: string, redirect_uri: string): Promise<ResultAuth | any> {
     try {
       const paramas = `?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${Code}&grant_type=authorization_code&redirect_uri=${redirect_uri}`
@@ -41,6 +42,11 @@ export class APITwitch {
 
   }
 
+  /**
+   * 
+   * @param AccessCode \
+   * @returns 
+   */
   public async getUserData(AccessCode: string): Promise<ResultApi | any> {
     try {
       const url = `${GlobalConfig.twitch.URL_API}${Endpoints.user}`
@@ -55,9 +61,9 @@ export class APITwitch {
       }).then(async response => {
         const result = await response.json()
         if (response.status !== 200) {
-          return  { valid: false, ...result }
+          return { valid: false, ...result }
         } else {
-          return { valid: true, data: result}
+          return { valid: true, data: result }
         }
       }).catch(data => {
         return { valid: false, ...data }

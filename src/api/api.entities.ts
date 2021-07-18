@@ -1,13 +1,12 @@
-export interface IURLParams {
-  URL: string
-  QueryParams: {}
-}
 
-export class URLParams implements IURLParams {
-  constructor(public _URL: string,public _QueryParams: {}) {
-    this.URL = _URL
-    this.QueryParams = _QueryParams
-  }
-  URL: string
-  QueryParams: {}
+export type ResultAuth = {
+  valid: boolean;
+  access_token: string
+  refresh_token: string
+  message: string
+}
+export type ResultApi = {
+  valid: boolean;
+  data: { data: [{ email: string, display_name: string, profile_image_url: string }] }
+  message: string
 }

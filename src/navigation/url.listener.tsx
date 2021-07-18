@@ -6,14 +6,13 @@ const AppUrlListener: React.FC<any> = () => {
 
   useEffect(() => {
     App.addListener('appUrlOpen', (data: any) => {
-      // Example url: https://beerswift.app/tabs/tab2
-      // slug = /tabs/tab2
-      const slug = data.url.split('.starter').pop();
+
+      const filterPop = data.url.includes("https://") ? ".starter" : ".starter:/"
+      const slug = data.url.split(filterPop).pop();
       if (slug) {
         history.push(slug);
       }
-      // If no match, do nothing - let regular routing
-      // logic take over
+
     });
   }, []);
 

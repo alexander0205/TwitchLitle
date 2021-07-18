@@ -5,12 +5,14 @@ import { RouteComponentProps } from 'react-router'
 import { Redirect } from "react-router-dom";
 var qs = require('qs')
 const IndexLogin: FC<RouteComponentProps> = ({ location }) => {
+ 
   const [showLoading, setShowLoading] = useState(true);
   const [error, setError] = useState("");
-  const [toast, showToast] = useState(true);
+  const [toast, showToast] = useState(false);
 
 
   const code = qs.parse(location.search, { ignoreQueryPrefix: true }).code
+
   const logeado = useAuth()
 
   useEffect(() => {
@@ -20,10 +22,12 @@ const IndexLogin: FC<RouteComponentProps> = ({ location }) => {
 
         setShowLoading(true)
         const result = await getAccesTokenByAccesCode(code)
-        
+        console.error(result,"Resultado")
         if (result.valid) {
+
           login({accessTokenKey:result.access_token, accessToken:result.access_token || "", refreshToken:""})
         } else {
+        
           showToast(true)
           setError(result.message)
           console.error("Erro login twitch", result)
