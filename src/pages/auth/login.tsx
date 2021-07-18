@@ -1,53 +1,60 @@
-import React, { FC, useEffect, useState } from 'react'
-import { browserAuthentication, login, useAuth, getAccesTokenByAccesCode } from '../../models/user.authentication'
-import Index from '../../components/login/index'
-import { RouteComponentProps } from 'react-router'
+import React, { FC, useEffect, useState } from "react";
+import {
+  browserAuthentication,
+  login,
+  useAuth,
+  getAccesTokenByAccesCode,
+} from "../../models/user.authentication";
+import Index from "../../components/login/index";
+import { RouteComponentProps } from "react-router";
 import { Redirect } from "react-router-dom";
-var qs = require('qs')
+var qs = require("qs");
 const IndexLogin: FC<RouteComponentProps> = ({ location }) => {
- 
   const [showLoading, setShowLoading] = useState(true);
   const [error, setError] = useState("");
   const [toast, showToast] = useState(false);
 
+  const code = qs.parse(location.search, { ignoreQueryPrefix: true }).code;
 
-  const code = qs.parse(location.search, { ignoreQueryPrefix: true }).code
-
-  const logeado = useAuth()
+  const logeado = useAuth();
 
   useEffect(() => {
     const authenticationUser = async () => {
-
       if (code) {
-
-        setShowLoading(true)
-        const result = await getAccesTokenByAccesCode(code)
-        console.error(result,"Resultado")
+        setShowLoading(true);
+        const result = await getAccesTokenByAccesCode(code);
+        console.error(result, "Resultado");
         if (result.valid) {
-
-          login({accessTokenKey:result.access_token, accessToken:result.access_token || "", refreshToken:""})
+          login({
+            accessTokenKey: result.access_token,
+            accessToken: result.access_token || "",
+            refreshToken: code,
+          });
         } else {
-        
-          showToast(true)
-          setError(result.message)
-          console.error("Erro login twitch", result)
+          showToast(true);
+          setError(result.message);
+          console.error("Erro login twitch", result);
         }
 
-        setShowLoading(false)
+        setShowLoading(false);
       }
-    }
+    };
 
-    authenticationUser()
-  }, [code])
+    authenticationUser();
+  }, [code]);
 
-  return logeado[0] ? <Redirect to={{ pathname: "/", }} /> :
+  return logeado[0] ? (
+    <Redirect to={{ pathname: "/" }} />
+  ) : (
     <Index
       code={code}
       authentication={browserAuthentication}
-      showLoading={showLoading} setShowLoading={setShowLoading}
+      showLoading={showLoading}
+      setShowLoading={setShowLoading}
       error={error}
-      toast={toast} 
+      toast={toast}
       showToast={showToast}
     />
-}
-export default IndexLogin
+  );
+};
+export default IndexLogin;

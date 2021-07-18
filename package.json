@@ -60,7 +60,10 @@
     "ios-dev": "ionic capacitor run ios -l --external",
     "android-dev": "ionic capacitor run android -l --external",
     "ios": "ionic capacitor run ios",
-    "android": "ionic capacitor run android"
+    "android": "ionic capacitor run android",
+    "lint": "eslint ./src --ignore-path .gitignore",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier --write ./src"
   },
   "eslintConfig": {
     "extends": [
